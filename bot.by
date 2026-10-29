@@ -1,9 +1,53 @@
+```python
 import os
+import requests
 import telebot
-TOKEN = os.environ.get("BOT_TOKEN")
-bot = telebot.TeleBot(TOKEN)
-@bot.message_handler(commands=["start"])
-def start(message):
-    bot.reply_to(message, "أهلًا بك في بوت Masaad 🤖\nالبوت يعمل بنجاح!")
 
+TOKEN = os.getenv("BOT_TOKEN") or os.getenv("TELEGRAM_BOT_TOKEN")
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=["start", "help"])
+def welcome(message):
+    bot.reply_to(
+        message,
+        "أهلًا بك في Masaad 🤖\n\n"
+        "الأوامر:\n"
+        "/gold - الذهب\n"
+        "/eurusd - اليورو مقابل الدولار\n"
+        "/help - المساعدة\n\n"
+        "الإشارات تعتمد على توفر بيانات السوق."
+    )
+
+def analyze(prices):
+    if len(prices) < 15:
+        return "🟡 انتظار: البيانات غير كافية"
+
+    recent = prices[-5:]
+    previous = prices[-15:-5]
+
+    short_avg = sum(recent) / len(recent)
+    long_avg = sum(previous) / len(previous)
+
+    if short_avg > long_avg:
+        return "🟢 ميل صاعد — شراء محتمل"
+    elif short_avg < long_avg:
+        return "🔴 ميل هابط — بيع محتمل"
+    return "🟡 انتظار"
+
+@bot.message_handler(commands=["gold", "eurusd"])
+def signal(message):
+    bot.reply_to(
+        message,
+        "📊 طلب تحليل السوق\n"
+        "لم تُربط بيانات الشموع بعد.\n"
+        "🟡 انتظار — لا توجد إشارة مؤكدة.\n\n"
+        "يلزم ربط مصدر أسعار حقيقي قبل إصدار إشارات."
+    )
+
+@bot.message_handler(commands=["ping"])
+def ping(message):
+    bot.reply_to(message, "✅ Masaad يعمل")
+
+print("Masaad is running")
 bot.infinity_polling()
+```
