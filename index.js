@@ -109,3 +109,5 @@ bot.onText(/\/help/, msg => {
 });
 console.log("Masaad started successfully");
 
+  );
+});
