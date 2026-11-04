@@ -107,4 +107,4 @@ bot.onText(/\/help/, msg => {
     "/help - المساعدة"
   );
 });
-console.log("Masaad started 
+console.log("Masaad started successfully");
