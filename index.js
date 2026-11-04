@@ -98,6 +98,14 @@ bot.onText(/\/signals/, async msg => {
 bot.onText(/\/ping/, msg => {
   bot.sendMessage(msg.chat.id, "Masaad يعمل ✅");
 });
-
+bot.onText(/\/help/, msg => {
+  bot.sendMessage(msg.chat.id,
+    "🤖 Masaad - المساعدة\n\n" +
+    "/start - تشغيل البوت\n" +
+    "/signals - إشارات جميع الأسواق\n" +
+    "/ping - اختبار البوت\n" +
+    "/help - المساعدة"
+  );
+});
 console.log("Masaad started successfully");
 
