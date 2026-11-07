@@ -71,12 +71,14 @@ async function analyze(symbol) {
     return "⚠️ تعذر جلب البيانات";
   }
 }
-
-bot.onText(/\/start/, msg => {
+bot.onText(/^\/help(?:@\w+)?$/i, (msg) => {
   bot.sendMessage(msg.chat.id,
-    "أهلاً بك في Masaad 🤖\n\n" +
-    "بوت تحليل الأسواق على فريم الدقيقة.\n" +
-    "اكتب /signals لتحليل الأسواق.");
+    "🤖 Masaad\n\n" +
+    "/start - تشغيل البوت\n" +
+    "/signals - إشارات الأسواق\n" +
+    "/ping - اختبار البوت\n" +
+    "/help - المساعدة"
+  );
 });
 
 bot.onText(/\/signals/, async msg => {
