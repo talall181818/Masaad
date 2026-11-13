@@ -1,3 +1,4 @@
+
 {
   "name": "masaad-bot",
   "version": "1.0.0",
@@ -6,7 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "node-telegram-bot-api": "^0.66.0",
-    "axios": "^1.7.9"
+    "grammy": "^1.35.0"
   }
 }
