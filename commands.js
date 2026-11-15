@@ -20,6 +20,7 @@ function calculateRSI(values, period = 14) {
 
   for (let i = values.length - period; i < values.length; i++) {
     const change = values[i] - values[i - 1];
+
     if (change > 0) gains += change;
     else losses += Math.abs(change);
   }
@@ -32,8 +33,10 @@ function calculateRSI(values, period = 14) {
 
 function analyzeSmart(history) {
   if (history.length < 22) {
-    return `⏳ تم تسجيل ${history.length} من 22 قراءة.
-أرسل أسعار Smart متتالية حتى يكتمل التحليل.`;
+    return (
+      `⏳ تم تسجيل ${history.length} من 22 قراءة.\n` +
+      "أرسل أسعار Smart متتالية حتى يكتمل التحليل."
+    );
   }
 
   const price = history[history.length - 1];
@@ -194,4 +197,3 @@ function registerCommands(bot) {
 }
 
 module.exports = { registerCommands };
-
