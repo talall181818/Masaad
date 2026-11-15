@@ -1,4 +1,3 @@
-
 import json
 import time
 from datetime import datetime, timezone
@@ -44,4 +43,3 @@ def main():
     print("Waiting for a verified price source...")
 
 if __name__ == "__main__":
-    main()
